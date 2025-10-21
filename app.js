@@ -52,20 +52,20 @@ app.set('view engine', 'ejs'); // optional, code uses renderHTML for static temp
 app.set('trust proxy', 1);
 
 // ✅ Pastikan folder sessions ada dan gunakan path absolut
-const sessionPath = path.join(__dirname, 'sessions');
+const sessionPath = path.join(__dirname, 'data', 'sessions');
 if (!fs.existsSync(sessionPath)) {
   try {
     fs.mkdirSync(sessionPath, { recursive: true });
-    console.log('Created sessions folder at', sessionPath);
+    console.log('✅ Folder sessions dibuat di', sessionPath);
   } catch (err) {
-    console.error('Failed to create sessions folder:', err);
+    console.error('❌ Gagal membuat folder sessions:', err);
   }
 }
 
-// ✅ Middleware session
+// ✅ Middleware session pakai FileStore
 app.use(session({
   store: new FileStore({
-    path: sessionPath, // gunakan path absolut, bukan './sessions'
+    path: sessionPath, // simpan di /data/sessions agar aman
     ttl: 24 * 60 * 60 // 1 hari (detik)
   }),
   secret: process.env.SESSION_SECRET || 'rahasia_super_aman_untuk_production',
@@ -73,7 +73,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 1 hari dalam ms
-    secure: process.env.NODE_ENV === 'production', // aktif kalau di Scalingo
+    secure: false, // ubah ke false dulu biar cookie tersimpan di Scalingo
     sameSite: 'lax',
     httpOnly: true
   }
