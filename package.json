@@ -8,10 +8,22 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^17.2.3",
-    "express": "^4.18.2",
+    "express": "^4.21.2",
     "express-session": "^1.17.3",
     "mysql2": "^3.15.2",
     "passport": "^0.6.0",
     "pg": "^8.11.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suryananndaa/JOKIELIGRAHFINAL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suryananndaa/JOKIELIGRAHFINAL/issues"
+  },
+  "homepage": "https://github.com/suryananndaa/JOKIELIGRAHFINAL#readme",
+  "description": ""
 }

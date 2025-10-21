@@ -7,8 +7,7 @@
     "last_name": "User",
     "email": "admin@example.com",
     "phone_number": "08123456789",
-    "role": "admin",
-    "google_id": null
+    "role": "admin"
   },
   {
     "user_id": 1761033816623,
