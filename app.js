@@ -51,22 +51,34 @@ app.set('view engine', 'ejs'); // optional, code uses renderHTML for static temp
 // ✅ trust proxy harus di atas session
 app.set('trust proxy', 1);
 
+// ✅ Pastikan folder sessions ada dan gunakan path absolut
+const sessionPath = path.join(__dirname, 'sessions');
+if (!fs.existsSync(sessionPath)) {
+  try {
+    fs.mkdirSync(sessionPath, { recursive: true });
+    console.log('Created sessions folder at', sessionPath);
+  } catch (err) {
+    console.error('Failed to create sessions folder:', err);
+  }
+}
+
 // ✅ Middleware session
 app.use(session({
-   store: new FileStore({
-     path: './sessions', // folder tempat simpan session
-     ttl: 24 * 60 * 60 // 1 hari
-   }),
-   secret: process.env.SESSION_SECRET || 'rahasia_super_aman_untuk_production',
-   resave: false,
-   saveUninitialized: false,
-   cookie: {
-     maxAge: 24 * 60 * 60 * 1000, // 1 hari dalam ms
-     secure: process.env.NODE_ENV === 'production', // aktif kalau di Scalingo
-     sameSite: 'lax',
-     httpOnly: true
-   }
- }));
+  store: new FileStore({
+    path: sessionPath, // gunakan path absolut, bukan './sessions'
+    ttl: 24 * 60 * 60 // 1 hari (detik)
+  }),
+  secret: process.env.SESSION_SECRET || 'rahasia_super_aman_untuk_production',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // 1 hari dalam ms
+    secure: process.env.NODE_ENV === 'production', // aktif kalau di Scalingo
+    sameSite: 'lax',
+    httpOnly: true
+  }
+}));
+
 
 // --- Simple renderHTML that substitutes {{placeholders}} in static HTML files ---
 function renderHTML(fileName, data = {}) {
