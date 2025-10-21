@@ -8,9 +8,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // File paths for JSON "database"
-const USERS_FILE = path.join(__dirname, 'users.json');
-const KAMAR_FILE = path.join(__dirname, 'kamar_tersedia.json');
-const LAPORAN_FILE = path.join(__dirname, 'laporan_keuangan.json');
+const USERS_FILE = path.join(__dirname, 'data', 'users.json');
+const KAMAR_FILE = path.join(__dirname, 'data', 'kamar_tersedia.json');
+const LAPORAN_FILE = path.join(__dirname, 'data', 'laporan_keuangan.json');
 
 // --- Helpers for JSON storage (synchronous for simplicity) ---
 function readJson(filePath) {
