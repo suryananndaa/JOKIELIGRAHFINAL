@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const FileStore = require('session-file-store')(session); // ⬅️ Tambahkan di sini
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const path = require('path');
@@ -47,17 +48,25 @@ app.use(express.json());
 app.set('views', path.join(__dirname));
 app.set('view engine', 'ejs'); // optional, code uses renderHTML for static templates
 
+// ✅ trust proxy harus di atas session
+app.set('trust proxy', 1);
+
+// ✅ Middleware session
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'rahasia_super_aman_untuk_production',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 24 * 60 * 60 * 1000,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    httpOnly: true
-  }
-}));
+   store: new FileStore({
+     path: './sessions', // folder tempat simpan session
+     ttl: 24 * 60 * 60 // 1 hari
+   }),
+   secret: process.env.SESSION_SECRET || 'rahasia_super_aman_untuk_production',
+   resave: false,
+   saveUninitialized: false,
+   cookie: {
+     maxAge: 24 * 60 * 60 * 1000, // 1 hari dalam ms
+     secure: process.env.NODE_ENV === 'production', // aktif kalau di Scalingo
+     sameSite: 'lax',
+     httpOnly: true
+   }
+ }));
 
 // --- Simple renderHTML that substitutes {{placeholders}} in static HTML files ---
 function renderHTML(fileName, data = {}) {
