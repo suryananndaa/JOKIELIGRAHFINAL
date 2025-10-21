@@ -9,5 +9,16 @@
     "phone_number": "08123456789",
     "role": "admin",
     "google_id": null
+  },
+  {
+    "user_id": 1761033816623,
+    "username": "eligrah",
+    "password": "$2a$10$6jflG6yJrGMcs8m9z6cp8.ls87cl59HrL3fsL/EQ5EDwzFPMZXgza",
+    "first_name": "eligrah",
+    "last_name": "philips",
+    "email": "eligrahgacor@gmail.com",
+    "dob": "2025-10-21",
+    "phone_number": "",
+    "role": "user"
   }
 ]
