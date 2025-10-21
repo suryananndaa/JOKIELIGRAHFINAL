@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "tipe_kamar": "Standard",
+    "harga": 1500000,
+    "deskripsi": "Kamar standar dengan AC, kamar mandi dalam, dan fasilitas lengkap",
+    "jumlah_tersedia": 5
+  },
+  {
+    "id": 2,
+    "tipe_kamar": "Deluxe",
+    "harga": 2000000,
+    "deskripsi": "Kamar deluxe dengan view yang bagus dan fasilitas premium",
+    "jumlah_tersedia": 3
+  },
+  {
+    "tipe_kamar": "tes",
+    "harga": 123,
+    "deskripsi": "123123",
+    "jumlah_tersedia": 123,
+    "id": 3
+  }
+]
